@@ -149,7 +149,7 @@ dialog::backdrop{background:rgba(0,0,0,.72)}dialog h3{margin:18px 0 6px;font-siz
 <div class="ci"><div class="ic" aria-hidden="true">T</div><a href="tel:+33610011756">+33 6 10 01 17 56</a></div>
 <div class="ci"><div class="ic" aria-hidden="true">F</div><span>France</span></div>
 <div class="btns"><a id="cal" class="btn" style="display:none" target="_blank" rel="noopener" data-i="cal">Or pick a time directly</a></div></div>
-<form id="cf" name="contact" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field"><input type="hidden" name="form-name" value="contact"><p hidden><label>Leave empty: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+<form id="cf" name="contact" method="POST" action="https://formsubmit.co/hello@scalyncy.com"><input type="hidden" name="_subject" value="Nouvelle demande - Scalyncy"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_template" value="table"><p hidden><label>Leave empty: <input name="_honey" tabindex="-1" autocomplete="off"></label></p>
 <label><span data-i="f1">Name</span><input id="nm" name="name" required maxlength="100" autocomplete="name"></label>
 <label><span data-i="f2">Email</span><input id="em" name="email" type="email" required maxlength="150" autocomplete="email"></label>
 <label><span data-i="f3">Phone (optional)</span><input id="ph" name="phone" type="tel" maxlength="30" autocomplete="tel"></label>
@@ -213,8 +213,8 @@ var v=function(i){return document.getElementById(i).value};
 function viaMail(){var slot=T[cur]["t"+v("tm")];var body=v("ms")+"\n\n"+v("nm")+"\n"+v("em")+"\n"+v("ph")+"\n"+v("dt")+" – "+slot;
 location.href="mailto:"+MAIL+"?subject="+encodeURIComponent(T[cur].sj)+"&body="+encodeURIComponent(body)}
 b.disabled=true;st.textContent="";
-fetch("/",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:new URLSearchParams(new FormData(f)).toString()})
-.then(function(r){if(!r.ok)throw 0;f.reset();st.textContent=T[cur].ok})
+fetch("https://formsubmit.co/ajax/hello@scalyncy.com",{method:"POST",headers:{"Accept":"application/json"},body:new FormData(f)})
+.then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(j){if(j&&j.success==="false")throw 0;f.reset();st.textContent=T[cur].ok})
 .catch(function(){st.textContent=T[cur].er;viaMail()})
 .then(function(){b.disabled=false})};
 var dg=document.getElementById("dg");
